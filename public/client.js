@@ -168,10 +168,15 @@ function onclickCheckbox_CameraMicrophone()
                 // コネクションオブジェクトに対してTrack追加を行う。
                 stream.getTracks().forEach( ( track ) =>
                 {
+                    const videoTrack = stream.getVideoTracks()[0];
+                    videoTrack.contentHint = "detail";
+                    //videoTrack.contentHint = "motion";
                     g_rtcPeerConnection.addTrack( track, stream );
                     // addTrack()の結果として、「Negotiation needed」イベントが発生する。
                 } );
             }
+
+            
 
             // HTML要素へのメディアストリームの設定
             console.log( "Call : setStreamToElement( Video_Local, stream )" );
