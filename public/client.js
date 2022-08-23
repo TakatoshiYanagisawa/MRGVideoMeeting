@@ -169,6 +169,8 @@ function onclickCheckbox_CameraMicrophone()
                 // コネクションオブジェクトに対してTrack追加を行う。
                 stream.getTracks().forEach( ( track ) =>
                 {
+                    const videoTrack = stream.getVideoTracks()[0];
+                    videoTrack.contentHint = "detail";
                     g_rtcPeerConnection.addTrack( track, stream );
                     // addTrack()の結果として、「Negotiation needed」イベントが発生する。
                 } );
@@ -216,7 +218,7 @@ function onsubmitButton_SendMessage()
     g_rtcPeerConnection.datachannel.send( JSON.stringify( { type: "message", data: g_elementTextMessageForSend.value } ) );
 
     // 送信メッセージをメッセージテキストエリアへ追加
-    g_elementTextareaMessageReceived.value = g_elementTextMessageForSend.value + "\n" + g_elementTextareaMessageReceived.value; // 一番上に追加
+    g_elementTextareaMessageReceived.value = g_elementTextUserName.value + "：" + g_elementTextMessageForSend.value + "\n" + g_elementTextareaMessageReceived.value; // 一番上に追加
     //g_elementTextareaMessageReceived.value += g_elementTextMessageForSend.value + "\n"; // 一番下に追加
     g_elementTextMessageForSend.value = "";
 }
@@ -428,7 +430,7 @@ function setupDataChannelEventHandler( rtcPeerConnection )
         {
             // 受信メッセージをメッセージテキストエリアへ追加
             let strMessage = objData.data;
-            g_elementTextareaMessageReceived.value = strMessage + "\n" + g_elementTextareaMessageReceived.value; // 一番上に追加
+            g_elementTextareaMessageReceived.value = g_elementTextRemoteUserName.value +"：" + strMessage + "\n" + g_elementTextareaMessageReceived.value; // 一番上に追加
             //g_elementTextareaMessageReceived.value += strMessage + "\n";  // 一番下に追加
         }
         else if( "offer" === objData.type )
