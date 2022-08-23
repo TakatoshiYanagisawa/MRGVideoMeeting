@@ -4,6 +4,7 @@
 
 const g_elementDivJoinScreen = document.getElementById( "div_join_screen" );
 const g_elementDivChatScreen = document.getElementById( "div_chat_screen" );
+const g_elementDivRightScreen = document.getElementById( "div_right_screen" );
 const g_elementInputUserName = document.getElementById( "input_username" );
 
 const g_elementCheckboxCamera = document.getElementById( "checkbox_camera" );
@@ -168,15 +169,10 @@ function onclickCheckbox_CameraMicrophone()
                 // コネクションオブジェクトに対してTrack追加を行う。
                 stream.getTracks().forEach( ( track ) =>
                 {
-                    const videoTrack = stream.getVideoTracks()[0];
-                    videoTrack.contentHint = "detail";
-                    //videoTrack.contentHint = "motion";
                     g_rtcPeerConnection.addTrack( track, stream );
                     // addTrack()の結果として、「Negotiation needed」イベントが発生する。
                 } );
             }
-
-            
 
             // HTML要素へのメディアストリームの設定
             console.log( "Call : setStreamToElement( Video_Local, stream )" );

@@ -2,12 +2,42 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>まるごとビデオ会議</title>
     <style type="text/css">
-        input:read-only, textarea:read-only {
-            background-color: #CCC;
+        .color{
+            background-color: #364e96;
         }
-
+        .color1{
+            background-color: #f0fff0;
+        }
+        input[id="text_username"]{
+            background-color: #ccc;
+            width         : 100%;
+            max-width     : 15vh;
+            height        : 4%;
+            border        : 2px solid #87a689;
+            opacity       : 0.4;
+            font-weight: bold;
+        }
+        input[id="text_remote_username"]{
+            background-color: #ccc;
+            width         : 30%;
+            max-width     : 15vh;
+            height        : 4%;
+            border        : 2px solid #87a689;
+            opacity       : 0.4;
+            font-weight: bold;
+        }
+        input[type="submit"]{
+            width         : 100%;
+            max-width     : 30vh;
+            height        : 4%;
+            border-radius: 10em;
+        }
         html {
             height: 100%;
         }
@@ -18,50 +48,238 @@
             display: flex;
             align-items: center;
             z-index: 10;
-            background-color: #888;
+            background-color: #f0fff0;
         }
+        #example {
+            position: relative;
+        }
+        #example span.right-video{
+            position: absolute;
+            top:  0;
+            right: 3vh;
+            width: 15%;
+        }
+        #example span.right-top{
+            position: absolute;
+            top:  0;
+            right: 3vh;
+            width: 15%;
+        }
+        #example span.right-top1{
+            position: absolute;
+            top: 18vh;
+            right: 3vh;
+            width: 15%;
+        }
+        #example span.right-bottom{
+            position: absolute;
+            bottom:-3vh;
+            right: 0;
+        }
+        #example span.right1{
+            position: absolute;
+            top: 0vh;
+            right: 3vh;
+            width: 15%;
+        }
+        #example span.left{
+            position: absolute;
+            top:  0;
+            left: 0;
+            margin: 0;
+            width: 40%;
+        }
+        textarea{
+            width: 100%;
+            height: 43vh;
+        }
+        .out{
+            position: absolute;
+            top: 3vh;
+            right: 5vh;
+        }
+        .btn-square {
+            display: inline-block;
+            padding: 0.5em 1em;
+            text-decoration: none;
+            background: #668ad8;/*ボタン色*/
+            color: #FFF;
+            border-bottom: solid 4px #627295;
+            border-radius: 3px;
+        }
+        .center{
+            text-align: right;
+        }
+        .nameinput{
+            position: absolute;
+            top:  40%;
+            left: 40%;
+            margin: 0;
+        }
+        h1 {
+            color: #364e96;/*文字色*/
+            padding: 0.5em 0;/*上下の余白*/
+            border-top: solid 3px #364e96;/*上線*/
+            border-bottom: solid 3px #364e96;/*下線*/
+        }
+        
+        .cp_ipcheck {
+	width: 100%;
+}
+@keyframes click-wave {
+	0% {
+		position: relative;
+		width: 30px;
+		height: 30px;
+		opacity: 0.35;
+	}
+	100% {
+		width: 200px;
+		height: 200px;
+		margin-top: -80px;
+		margin-left: -80px;
+		opacity: 0;
+	}
+}
+.cp_ipcheck .option-input02 {
+	position: relative;
+	top: 13.33333px;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 30px;
+	height: 30px;
+	margin-right: 0.5rem;
+	cursor: pointer;
+	transition: all 0.15s ease-out 0s;
+	color: #ffffff;
+	border: none;
+	outline: none;
+	background: #d7cbcb;
+	-webkit-appearance: none;
+	        appearance: none;
+    border: 2px solid #b33e5c;
+    
+}
+.cp_ipcheck .option-input02:hover {
+	background: #d6a9a9;
+}
+.cp_ipcheck .option-input02:checked {
+	background: #da3c41;
+}
+.cp_ipcheck .option-input02:checked::before {
+	font-size: 21px;
+	line-height: 25px;
+	position: absolute;
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	content: '✔';
+	text-align: center;
+}
+
+.cp_ipcheck .option-input02:checked::after {
+	position: relative;
+	display: block;
+	content: '';
+	-webkit-animation: click-wave 0.65s;
+	        animation: click-wave 0.65s;
+	background: #da3c41;
+}
+.cp_ipcheck .option-input02.radio {
+	border-radius: 50%;
+}
+.cp_ipcheck .option-input02.radio::after {
+	border-radius: 50%;
+}
+.cp_ipcheck label {
+	line-height: 40px;
+	display: block;
+}
+.cp_ipcheck .option-input02:disabled {
+	cursor: not-allowed;
+	background: #b8b7b7;
+}
+.cp_ipcheck .option-input02:disabled::before {
+	font-size: 20px;
+	line-height: 30px;
+	position: absolute;
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	content: '✖︎';
+	text-align: center;
+}
+video[id="video_remote"]{
+   width: 80%;
+   height:75vh;
+   object-fit: cover;
+}
+video[id="video_local"]{
+   width: 100%;
+   height:20vh;
+   left: 0;
+   object-fit: cover;
+}
+.bold{
+    font-weight: bold;
+} 
     </style>
 </head>
-<body style="display: flex; flex-direction: column; width: 100%; height: 100%; margin: 0;">
-    <h1 style="margin: 8px">まるごとビデオ会議　Ver0.1</h1>
+<body style="display: flex; flex-direction: column; width: 100%; height: 100%; ">
+    <h1 style="margin: 10px; text-align: center;">まるごとビデオ会議 <span class="badge bg-secondary">New</span></h1>
 
-    <div style="flex: 1;">
+    <div style="flex: 1;" class="color1">
         <div id="div_join_screen">
             <!-- エンターキーによるボタン押下を行うために、<button>ではなく<form>と<input type="submit">を使用。
             ボタン押下(=submit)時にページリロードが行われないように、onsubmitの設定の最後に"return false;"を追加。-->
-            <form action="" onsubmit="onsubmitButton_Join(); return false;" style="text-align: center; width: 100%;">
-                名前を入力してください<br />
-                <input type="text" id="input_username" placeholder="名前を入力してください" autofocus><br /><br />
-                <input type="submit" value="接続" />
+            <form action="" onsubmit="onsubmitButton_Join(); return false;" style="text-align: center; width: 20%;" class="nameinput" >
+                <h2>名前を入力してください</h2>
+                <input type="text" id="input_username" class="form-control form-control-lg" placeholder="名前を入力してください" autofocus required><br />
+                <input type="submit" value="接続" class="btn btn-primary"/>
             </form>
         </div>
-
+        
         <div id="div_chat_screen" style="margin: 8px; display: none;">
-            <input type="checkbox" id="checkbox_camera" onclick="onclickCheckbox_CameraMicrophone()">カメラ
-            <input type="checkbox" id="checkbox_microphone" onclick="onclickCheckbox_CameraMicrophone()">マイク
+            <div style="text-align: center;">
+                <div class="cp_ipcheck">
+                    <div class="bold">
+            <input type="checkbox" id="checkbox_camera" onclick="onclickCheckbox_CameraMicrophone()" class="option-input02 checkbox" >カメラ
+            <input type="checkbox" id="checkbox_microphone" onclick="onclickCheckbox_CameraMicrophone()" class="option-input02 checkbox">マイク
+                    </div>
+                </div>
+        </div>
             <br />
-            <div id="div_userinfo" style="display: flex; flex-wrap: wrap">
-                <div border="1px solid black"><input type="text" id="text_remote_username" readonly="readonly"><br /><video id="video_remote" width="1024" height="768" style="border: 1px solid black;" autoplay></video><audio id="audio_remote" autoplay></audio></div>
-                <div border="1px solid black"><input type="text" id="text_username" readonly="readonly"><br /><video id="video_local" width="320" height="240" style="border: 1px solid black;" autoplay></video></div>
-            </div>
-
-            <!-- エンターキーによるボタン押下を行うために、<button>ではなく<form>と<input type="submit">を使用。
+        <div id = "example">
+            <div id="div_userinfo">
+                <div border="1px solid black" style="text-align: left" ><video id="video_remote"style="border: 3px solid black;" autoplay ></video><audio id="audio_remote" autoplay></audio><span class="right-video"><video id="video_local" style="border: 3px solid black;" autoplay ></video><span></span></video></div>
+                <span class="left"><input type="text" id="text_remote_username" readonly="readonly" width="40%" style="border-top: solid 5px #5d627b;box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22)"></span>
+                <span class="right1"><input type="text" id="text_username" readonly="readonly"style="border-top: solid 5px #5d627b;box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22)"></span>
+                <div style="text-align: left" ><span class="right-top1"><div border="px solid black"></span><br /></div><br />
+                <!-- エンターキーによるボタン押下を行うために、<button>ではなく<form>と<input type="submit">を使用。
             ボタン押下(=submit)時にページリロードが行われないように、onsubmitの設定の最後に"return false;"を追加。-->
             <form action="" onsubmit="onsubmitButton_SendMessage(); return false;">
-                <input type="text" id="text_message_for_send" size="40" /><input type="submit" value="メッセージ送信" />
+                <input type="text" id="text_message_for_send" size="20" class="form-control form-control-lg" required/><input type="submit" value="メッセージ送信" class="btn btn-success" />
             </form>
-            <textarea id="textarea_message_received" rows="10" cols="60" readonly="readonly"></textarea>
-
+            <textarea id="textarea_message_received" readonly="readonly" ></textarea>
+            <span class="right-bottom"><a href="内線番号表.pdf" target="_blank">電話番号</a></span>
+            </span>
+                
             <!-- <br />
             <button onclick="onclickButton_SendOfferSDP()">Send OfferSDP.</button> -->
-
-            <br />
-            <button onclick="onclickButton_LeaveChat()">退出</button>
+            </div>
         </div>
-    </div>
-
+            <br />
+        </div>
+        
+        <div class="out">
+            <button onclick="onclickButton_LeaveChat()" class="btn btn-danger">退出</button>
+        </div>
+    
     <!-- Script -->
     <script src="/socket.io/socket.io.js"></script>
     <script src="./client.js"></script>
+</div>
+</div>
 </body>
 </html>
